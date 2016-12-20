@@ -1,0 +1,82 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: 将寛
+ * Date: 2016/12/08
+ * Time: 17:14
+ */
+?>
+
+<html>
+<head>
+    <title>電卓</title>
+</head>
+<body>
+<form method="POST" action="dentaku.php">
+    計算式：
+    <input type="number" name="num1" size="4" />
+    <select name="mark" size="1">
+        <option value="＋">＋</option>
+        <option value="－">－</option>
+        <option value="×">×</option>
+        <option value="÷">÷</option>
+    </select>
+
+    <input type="number" name="num2" size="4" />
+    <input type="submit" value="計算結果"/>
+</form>
+</body>
+</html>
+
+
+<?php
+/**
+ * Created by PhpStorm.
+ * User: 将寛
+ * Date: 2016/12/10
+ * Time: 11:49
+ */
+//var_dump($_POST);
+
+if (!isset($_POST["num1"])){
+    return;
+}
+
+
+
+if(!isset($_POST["num2"])){
+    return;}
+
+
+
+
+
+$num1 = $_POST['num1'];
+$mark = $_POST['mark'];
+$num2 = $_POST['num2'];
+
+
+
+switch ($mark) {
+    case "＋":
+        $cal = $num1+$num2;
+        break;
+    case "－":
+        $cal = $num1-$num2;
+        break;
+    case "×":
+        $cal = $num1*$num2;
+        break;
+    case "÷":
+        if($num2 === '0')
+            $cal='ごめんなさい、0では割れないんです';
+
+        else{$cal = $num1 / $num2;}
+        break;
+    default:
+        print '不適切な値です';
+
+};
+
+echo  $num1,$mark,$num2, "＝", $cal;
+?>
