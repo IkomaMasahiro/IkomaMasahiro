@@ -38,15 +38,17 @@
  */
 //var_dump($_POST);
 
-if (!isset($_POST["num1"])){
-    return;
-}
 
-
+if (!isset($_POST["num1"])){        //未入力の処理
+    return;}
 
 if(!isset($_POST["num2"])){
     return;}
 
+
+if ($_POST['num1']===''||$_POST['num2']===''){    //未入力の表示
+    echo '<span style="color: #fa0000">【注意】　数字の入力をお願いします！</span>';
+    return;}
 
 
 
@@ -68,8 +70,9 @@ switch ($mark) {
         $cal = $num1*$num2;
         break;
     case "÷":
-        if($num2 === '0')
-            $cal='ごめんなさい、0では割れないんです';
+        if($num2 === '0'){      //0の割り算の処理
+            $cal='<span style="color: #fa0000">【0の割り算はできません、もう一度やり直してくださいね！】</span>';}
+
 
         else{$cal = $num1 / $num2;}
         break;
@@ -79,4 +82,6 @@ switch ($mark) {
 };
 
 echo  $num1,$mark,$num2, "＝", $cal;
+
+
 ?>
