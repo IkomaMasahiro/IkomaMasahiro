@@ -71,7 +71,7 @@ switch ($mark) {
         break;
     case "÷":
         if($num2 === '0'){      //0の割り算の処理
-            $cal='<span style="color: #fa0000">【0の割り算はできません、もう一度やり直してくださいね！】</span>';}
+            $cal='<span style="color: #fa0000">【0の割り算はできません、もう一度やり直してください！】</span>';}
 
 
         else{$cal = $num1 / $num2;}
