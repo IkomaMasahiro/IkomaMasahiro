@@ -39,10 +39,7 @@
 //var_dump($_POST);
 
 
-if (!isset($_POST["num1"])){        //未入力の処理
-    return;}
-
-if(!isset($_POST["num2"])){
+if (!isset($_POST["num1"],$_POST["num2"])){        //未入力の処理
     return;}
 
 
