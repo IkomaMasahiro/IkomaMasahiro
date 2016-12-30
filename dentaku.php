@@ -14,7 +14,7 @@
 <body>
 <form method="POST" action="dentaku.php">
     計算式：
-    <input type="number" name="num1" size="4" />
+    <input type="number" name="num1" size="4"/>
     <select name="mark" size="1">
         <option value="＋">＋</option>
         <option value="－">－</option>
@@ -39,16 +39,19 @@
 //var_dump($_POST);
 
 
-if (!isset($_POST["num1"],$_POST["num2"])){        //未入力の処理
+if (!isset($_POST["num1"],$_POST["num2"],$_POST["mark"])){             //未入力の処理
     return;}
 
 
-if ($_POST['num1']===''||$_POST['num2']===''){    //未入力の表示
+if ($_POST['num1']===''||$_POST['num2']===''){          //未入力の表示
     echo '<span style="color: #fa0000">【注意】　数字の入力をお願いします！</span>';
     return;}
 
+if(!ctype_digit($_POST['num1']||$_POST['num2'])) {      //数字以外が入力された時の処理
+    echo '<span style="color: #fa0000">半角数字で入力してください</span>';
+    return;
 
-
+}
 
 $num1 = $_POST['num1'];
 $mark = $_POST['mark'];
