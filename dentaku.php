@@ -47,11 +47,14 @@ if ($_POST['num1']===''||$_POST['num2']===''){          //未入力の表示
     echo '<span style="color: #fa0000">【注意】　数字の入力をお願いします！</span>';
     return;}
 
-if(!ctype_digit($_POST['num1']||$_POST['num2'])) {      //数字以外が入力された時の処理
+if(!ctype_digit($_POST['num1'])) {      //数字以外が入力された時の処理
     echo '<span style="color: #fa0000">半角数字で入力してください</span>';
-    return;
+    return;}
 
-}
+if(!ctype_digit($_POST['num2'])) {      //数字以外が入力された時の処理
+    echo '<span style="color: #fa0000">半角数字で入力してください</span>';
+    return;}
+
 
 $num1 = $_POST['num1'];
 $mark = $_POST['mark'];
@@ -71,7 +74,8 @@ switch ($mark) {
         break;
     case "÷":
         if($num2 === '0'){      //0の割り算の処理
-            $cal='<span style="color: #fa0000">【0の割り算はできません、もう一度やり直してください！】</span>';}
+            $cal='<span style="color: #fa0000">【0の割り算はできません、もう一度やり直してください！】</span>';
+            return;}
 
 
         else{$cal = $num1 / $num2;}
