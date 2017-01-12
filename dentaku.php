@@ -47,11 +47,7 @@ if ($_POST['num1']===''||$_POST['num2']===''){          //未入力の表示
     echo '<span style="color: #fa0000">【注意】　数字の入力をお願いします！</span>';
     return;}
 
-if(!ctype_digit($_POST['num1'])) {      //数字以外が入力された時の処理
-    echo '<span style="color: #fa0000">半角数字で入力してください</span>';
-    return;}
-
-if(!ctype_digit($_POST['num2'])) {      //数字以外が入力された時の処理
+if((!ctype_digit($_POST['num2'])) || (!ctype_digit($_POST['num1']))) {      //数字以外が入力された時の処理
     echo '<span style="color: #fa0000">半角数字で入力してください</span>';
     return;}
 
