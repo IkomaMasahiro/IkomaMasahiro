@@ -44,7 +44,7 @@ if (!isset($_POST["num1"],$_POST["num2"],$_POST["mark"])){             //未入�
 
 
 if ($_POST['num1']===''||$_POST['num2']===''){          //未入力の表示
-    echo '<span style="color: #fa0000">【注意】　数字の入力をお願いします！</span>';
+    echo '<span style="color: #fa0000">【注意】　数字の入力をお願いします</span>';
     return;}
 
 if((!ctype_digit($_POST['num2'])) || (!ctype_digit($_POST['num1']))) {      //数字以外が入力された時の処理
@@ -70,16 +70,16 @@ switch ($mark) {
         break;
     case "÷":
         if($num2 === '0'){      //0の割り算の処理
-            $cal='<span style="color: #fa0000">【0の割り算はできません、もう一度やり直してください！】</span>';
-            return;}
+            echo'<span style="color: #fa0000">0の割り算はできません、もう一度やり直してください</span>';
+            return;
 
-
-        else{$cal = $num1 / $num2;}
+        }else{$cal = $num1 / $num2;}
         break;
+
     default:
         print '不適切な値です';
 
-};
+}
 
 echo  $num1,$mark,$num2, "＝", $cal;
 
