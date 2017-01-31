@@ -37,17 +37,16 @@ if (isset($_POST["name"],$_POST["contents"])) {
 
     if ($_POST['name'] === '' || $_POST["contents"] === '') {          //未入力の表示
         echo '<span style="color: #fa0000">【注意】　すべての項目を入力してください</span>';
-        return;
-    }
 
-    if ($_POST['name']>30){ //文字数制限の処理
+
+    } elseif ($_POST['name'] > 30) { //文字数制限の処理
         echo '<span style="color: #fa0000">文字数は30字までです</span>';
-        return;
 
-    }elseif ($_POST['contents']>200){
+
+    } elseif ($_POST['contents'] > 200) {
         echo '<span style="color: #fa0000">文字数は200文字までです</span>';
-        return;
-    }
+
+    } else {
     try {
         $db = getDb();
 // INSERT命令の準備
@@ -59,6 +58,7 @@ if (isset($_POST["name"],$_POST["contents"])) {
         $db = NULL;
     } catch (PDOException $e) {
         die("エラーメッセージ:{$e->getMessage()}");
+    }
     }
 }
 ?>
