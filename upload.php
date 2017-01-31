@@ -51,7 +51,7 @@ if (isset($_POST["name"],$_POST["contents"])) {
     try {
         $db = getDb();
 // INSERT命令の準備
-        $stt = $db->prepare('INSERT INTO post3(name,contents) VALUES(:name,:contents)');
+        $stt = $db->prepare('INSERT INTO post(name,contents) VALUES(:name,:contents)');
 //INSERT命令を実行
         $stt->bindValue(':name', $_POST['name']);
         $stt->bindValue(':contents', $_POST['contents']);
