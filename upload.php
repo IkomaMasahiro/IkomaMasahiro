@@ -15,10 +15,10 @@
 <form method="POST" action="upload.php">
     <div align="center"><br><br>
 
-        ユーザネーム（30字まで）:
+        ユーザネーム<span style="color: #2636fa">（30字まで）</span>:
         <input type="text" name="name" size="25" maxlength="30" /><br/><br/>
 
-        本文　(200字まで)<br>
+        本文　<span style="color: #2636fa">(200字まで)<br></span>
         <textarea name = "contents" rows = "10" cols = "100" maxlength = "200"></textarea><br><br>
 
     <input type="submit" name="bottom" value="投稿"/>
