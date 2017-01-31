@@ -72,7 +72,7 @@ if (isset($_POST["name"],$_POST["contents"])) {
 <?php
 try {
     $db = getDb();
-    $stt = $db->prepare('SELECT * FROM post3 ORDER BY id DESC ');
+    $stt = $db->prepare('SELECT * FROM post ORDER BY id DESC ');
     $stt->execute();
     while ($row = $stt->fetch(PDO::FETCH_ASSOC)) {
         ?>
