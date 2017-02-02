@@ -36,31 +36,33 @@ $db = getDb();
 if (isset($_POST["name"],$_POST["contents"])) {
 
     if ($_POST['name'] === '' || $_POST["contents"] === '') {          //未入力の表示
-        echo '<span style="color: #fa0000">【注意】　すべての項目を入力してください</span>';
+        echo '<span style="color: #fa0000">【注意】　すべての項目を入力してください<br><br></span>';
+    }
 
+    if (mb_strlen($_POST['name'])> 30) { //文字数制限の処理
+        echo '<span style="color: #fa0000">【注意】  文字数は30字までです<br><br></span>';
+    }
 
-    } elseif ($_POST['name'] > 30) { //文字数制限の処理
-        echo '<span style="color: #fa0000">文字数は30字までです</span>';
+    if (mb_strlen($_POST['contents']) > 200) {
+        echo '<span style="color: #fa0000">【注意】  文字数は200文字までです<br><br></span>';
+    }
 
+}else {
 
-    } elseif ($_POST['contents'] > 200) {
-        echo '<span style="color: #fa0000">文字数は200文字までです</span>';
-
-    } else {
-    try {
-        $db = getDb();
+        try {
+            $db = getDb();
 // INSERT命令の準備
-        $stt = $db->prepare('INSERT INTO post(name,contents) VALUES(:name,:contents)');
+            $stt = $db->prepare('INSERT INTO post(name,contents) VALUES(:name,:contents)');
 //INSERT命令を実行
-        $stt->bindValue(':name', $_POST['name']);
-        $stt->bindValue(':contents', $_POST['contents']);
-        $stt->execute();
-        $db = NULL;
-    } catch (PDOException $e) {
-        die("エラーメッセージ:{$e->getMessage()}");
-    }
-    }
-}
+             $stt->bindValue(':name', $_POST['name']);
+             $stt->bindValue(':contents', $_POST['contents']);
+             $stt->execute();
+             $db = NULL;
+        } catch (PDOException $e) {
+            die("エラーメッセージ:{$e->getMessage()}");
+        }
+        }
+
 ?>
     <div align="center">投稿表示
 <body>
