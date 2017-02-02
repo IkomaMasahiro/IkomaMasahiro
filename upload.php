@@ -47,21 +47,20 @@ if (isset($_POST["name"],$_POST["contents"])) {
         echo '<span style="color: #fa0000">【注意】  文字数は200文字までです<br><br></span>';
     }
 
-}else {
-
-        try {
-            $db = getDb();
-// INSERT命令の準備
-            $stt = $db->prepare('INSERT INTO post(name,contents) VALUES(:name,:contents)');
-//INSERT命令を実行
-             $stt->bindValue(':name', $_POST['name']);
-             $stt->bindValue(':contents', $_POST['contents']);
-             $stt->execute();
-             $db = NULL;
-        } catch (PDOException $e) {
-            die("エラーメッセージ:{$e->getMessage()}");
-        }
-        }
+} else {
+    try {
+        $db = getDb();
+        // INSERT命令の準備
+        $stt = $db->prepare('INSERT INTO post(name,contents) VALUES(:name,:contents)');
+        //INSERT命令を実行
+        $stt->bindValue(':name', $_POST['name']);
+        $stt->bindValue(':contents', $_POST['contents']);
+        $stt->execute();
+        $db = NULL;
+    } catch (PDOException $e) {
+        die("エラーメッセージ:{$e->getMessage()}");
+    }
+}
 
 ?>
     <div align="center">投稿表示
@@ -71,24 +70,25 @@ if (isset($_POST["name"],$_POST["contents"])) {
     <th>ID</th><th>name</th><th>contents</th>
     </tr>
     </div>
+
 <?php
 try {
     $db = getDb();
     $stt = $db->prepare('SELECT * FROM post ORDER BY id DESC ');
     $stt->execute();
     while ($row = $stt->fetch(PDO::FETCH_ASSOC)) {
-        ?>
+?>
         <tr>
             <td><?php print($row['id']); ?></td>
             <td><?php print($row['name']); ?></td>
             <td><?php print($row['contents']); ?></td>
         </tr>
-        <?php
+</table>
+</body>
+<?php
     }
     $db = NULL;
 } catch (PDOException $e) {
     die("エラーメッセージ :{$e->getMessage()}");
 }
 ?>
-</table>
-</body>
