@@ -6,42 +6,38 @@
 <form method="POST" action="upload.php">
     <div align="center"><br><br>
 
-        ユーザネーム<span style="color: #2636fa">（30字まで）</span>:
-        <input type="text" name="name" size="25" maxlength="30" /><br/><br/>
-
-
         本文　<span style="color: #2636fa">(200字まで)<br></span>
         <textarea name = "contents" rows = "10" cols = "100" maxlength = "200"></textarea><br><br>
         <input type="submit" name="bottom" value="投稿"/>
-
     </div>
 </form>
 </body>
 </html>
 
 <?php
+
+session_start();
+var_dump($_SESSION['join']);
+
 require_once 'DbManager.php';
 require_once 'encodek1.php';
 $db = getDb();
-if (!isset($_POST["name"], $_POST["contents"])) {
-    $error = 'ユーザーネーム・本文を入力してください';
+if (!isset($_POST["contents"])) {
+    $error = '本文を入力してください';
 
-}elseif (isset($_POST["name"], $_POST["contents"])) {
-    if ($_POST['name'] === '' || $_POST["contents"] === '') {          //未入力の表示
+}elseif (isset( $_POST["contents"])) {
+    if ( $_POST["contents"] === '') {          //未入力の表示
         $error = '【注意】　すべての項目を入力してください';
 
-    } elseif (mb_strlen($_POST['name']) > 30) { //文字数制限の処理
-        $error = '【注意】 ユーザーネームは30文字・本文は200以内で入力してください';
-
     } elseif (mb_strlen($_POST['contents']) > 200) {
-        $error = '【注意】　ユーザーネームは30字・本文は200文字以内で入力してください';
+        $error = '【注意】本文は200文字以内で入力してください';
 
-    } else {
+    } else{
         try {
             $db = getDb();
             // INSERT命令の準備
 
-            $stt = $db->prepare('INSERT INTO post(name,contents) VALUES(:name,:contents)');
+            $stt = $db->prepare('INSERT INTO post(user_id,contents) VALUES(:name,:contents)');
             //INSERT命令を実行
             $stt->bindValue(':name', $_POST['name']);
             $stt->bindValue(':contents', $_POST['contents']);
@@ -80,7 +76,7 @@ if (!isset($_POST["name"], $_POST["contents"])) {
             ?>
             <tr>
                 <td><?php print e($row['id']); ?></td>
-                <td><?php print e($row['name']); ?></td>
+                <td><?php print e($row['user_id']); ?></td>
                 <td><?php print e($row['contents']); ?></td>
             </tr>
 
