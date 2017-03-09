@@ -7,7 +7,7 @@
  */
 
 function getDb() {
-    $dsn = 'mysql:dbname=keijibandb1; host=127.0.0.1';
+    $dsn = 'mysql:dbname=board2; host=127.0.0.1';
     $usr = 'root';
     $passwd = '';
 
